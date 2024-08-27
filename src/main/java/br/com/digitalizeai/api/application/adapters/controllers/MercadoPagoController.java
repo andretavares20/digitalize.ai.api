@@ -1,4 +1,4 @@
-package br.com.digitalizeai.api.controllers;
+package br.com.digitalizeai.api.application.adapters.controllers;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import com.mercadopago.client.preference.PreferenceItemRequest;
 import com.mercadopago.client.preference.PreferenceRequest;
 import com.mercadopago.resources.preference.Preference;
 
-import br.com.digitalizeai.api.requests.UpdatePreferenceRequest;
+import br.com.digitalizeai.api.domain.dtos.requests.UpdatePreferenceRequest;
 
 @RestController
 @RequestMapping("/mercadopago")

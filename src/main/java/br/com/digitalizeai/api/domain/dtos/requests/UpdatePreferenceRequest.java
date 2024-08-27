@@ -1,4 +1,4 @@
-package br.com.digitalizeai.api.requests;
+package br.com.digitalizeai.api.domain.dtos.requests;
 
 import java.math.BigDecimal;
 
