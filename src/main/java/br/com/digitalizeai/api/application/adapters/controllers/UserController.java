@@ -20,10 +20,9 @@ import br.com.digitalizeai.api.domain.ports.interfaces.UserServicePort;
 @RequestMapping("users")
 public class UserController {
 
-    
     private final UserServicePort userServicePort;
 
-    public UserController(UserServicePort userServicePort){
+    public UserController(UserServicePort userServicePort) {
         this.userServicePort = userServicePort;
     }
 
@@ -37,11 +36,6 @@ public class UserController {
         Optional<User> user = userServicePort.getUserById(id);
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userServicePort.createUser(user);
     }
 
     @PutMapping("/{id}")

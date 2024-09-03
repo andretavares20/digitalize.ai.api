@@ -1,12 +1,24 @@
 package br.com.digitalizeai.api.domain;
 
+import br.com.digitalizeai.api.domain.enums.RoleEnum;
+
 public class User {
 
     private Long id;
+    private String name;
     private String username;
     private String password;
     private String email;
-    private String role;
+    private RoleEnum role;
+    private String telephone;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -40,27 +52,39 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEnum role) {
         this.role = role;
     }
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String email, String role) {
+   
+
+    public User(Long id, String name, String username, String password, String email, RoleEnum role, String telephone) {
         this.id = id;
+        this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.telephone = telephone;
     }
 
-    //TODO: construtor com userDto
-    //TODO: funções ex: atualizarEstoque
-    //TODO: toUserDto
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    // TODO: construtor com userDto
+    // TODO: funções ex: atualizarEstoque
+    // TODO: toUserDto
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.digitalizeai.api.domain.User;
 import br.com.digitalizeai.api.domain.ports.repositories.UserRepositoryPort;
+import br.com.digitalizeai.api.infra.adapters.entities.UserEntity;
 
 @Component
 public class UserRepository implements UserRepositoryPort {
@@ -30,9 +31,15 @@ public class UserRepository implements UserRepositoryPort {
     }
 
     @Override
+    public Optional<User> findByUsername(String username) {
+        return springUserRepository.findByUsername(username)
+                                   .map(UserEntity::toUser); // Convertendo UserEntity para User
+    }
+
+    @Override
     public User save(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        UserEntity userEntity = new UserEntity(user);
+        return springUserRepository.save(userEntity).toUser();
     }
 
     @Override
@@ -40,4 +47,17 @@ public class UserRepository implements UserRepositoryPort {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return springUserRepository.findByEmail(email)
+                                   .map(UserEntity::toUser); // Convertendo UserEntity para User
+    }
+
+    @Override
+    public Boolean isTelephoneAvailable(String telephone) {
+        return !springUserRepository.existsByTelephone(telephone);
+    }
+
+    
 }

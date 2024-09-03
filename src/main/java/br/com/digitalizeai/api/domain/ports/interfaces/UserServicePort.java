@@ -11,4 +11,7 @@ public interface UserServicePort {
     User createUser(User user);
     User updateUser(Long id, User userDetails);
     void deleteUser(Long id);
+    Optional<User> findByUsername(String username);
+    Boolean isEmailAvailable(String email);
+    Boolean isTelephoneAvailable(String telephone);
 }
