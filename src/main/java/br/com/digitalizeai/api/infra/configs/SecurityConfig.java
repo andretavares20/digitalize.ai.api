@@ -17,10 +17,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/client/**","/mercadopago/**").permitAll()
+                        .requestMatchers("/client/**", "/mercadopago/**").permitAll()
                         .anyRequest().authenticated())
-                .formLogin(login -> login.loginPage("/login").permitAll())
-                .logout(logout -> logout.permitAll());
+                .logout(logout -> logout.permitAll())  // Permite logout sem redirecionamento desnecessário
+                .httpBasic(basic -> basic.disable());  // Desabilite a autenticação básica se estiver usando JWT.
 
         return http.build();
     }

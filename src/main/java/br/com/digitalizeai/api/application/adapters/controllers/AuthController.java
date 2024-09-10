@@ -36,6 +36,8 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(jwt);
+
+        // Retorna o token diretamente sem redirecionamento
+        return ResponseEntity.ok().body("{\"token\": \"" + jwt + "\"}");
     }
 }
