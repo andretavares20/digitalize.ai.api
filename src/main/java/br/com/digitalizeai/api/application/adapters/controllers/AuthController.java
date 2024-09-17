@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.digitalizeai.api.domain.dtos.requests.LoginRequestDTO;
-import br.com.digitalizeai.api.infra.providers.JwtTokenProvider;
+import br.com.digitalizeai.api.infra.security.JwtTokenProvider;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/client/auth")
+@Slf4j
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -29,15 +31,16 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),  // Usando email para autenticação
-                        loginRequest.getPassword()
-                )
-        );
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.generateToken(authentication);
 
-        // Retorna o token diretamente sem redirecionamento
-        return ResponseEntity.ok().body("{\"token\": \"" + jwt + "\"}");
+        // Log do token JWT gerado
+        log.debug("Token JWT gerado: {}", jwt);
+
+        return ResponseEntity.ok(jwt); // Certifique-se de que o token JWT está na resposta
     }
+
 }

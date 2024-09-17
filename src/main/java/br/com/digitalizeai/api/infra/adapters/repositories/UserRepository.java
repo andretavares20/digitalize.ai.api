@@ -20,8 +20,7 @@ public class UserRepository implements UserRepositoryPort {
 
     @Override
     public List<User> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return springUserRepository.findAll().stream().map(UserEntity::toUser).toList();
     }
 
     @Override
